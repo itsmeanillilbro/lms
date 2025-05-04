@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::middleware('auth')->group(function () {
-  
-    Route::resource('book', BookController::class);
+Route::post('/login', [BookController::class, 'login'] );
+Route::post('/logout',[BookController::class,'logout']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('books', BookController::class);
 });
+
